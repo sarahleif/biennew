@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for :page_title %> – Bien Reviews – the best restaurants in the world</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <h1>
+          <%= link_to root_path do %>
+            <%= image_tag "bien-logo.svg" %>
+          <% end %>
+        </h1>        
+      </nav>
+      <nav>
+        <% if is_logged_in? %>
+        
+          <%= @current_user.username %>
+          
+          <% if @current_user.is_admin? %>
+            <%= link_to "Admin", admin_root_path %>
+          <% end %>
+          
+          <%= link_to "Add a review", new_review_path %>
+          <%= link_to "Edit account", edit_account_path %>
+          <%= link_to "Log out", session_path, method: :delete %>
+          
+        <% else %>
+        
+          <%= link_to "Sign up", new_user_path %>
+          <%= link_to "Log in", new_session_path %>
+        
+        <% end %>
+        
+      </nav>
+    </header>   
+    
+    <% if flash[:success].present? %>
+      <div class="success">
+        <%= flash[:success] %>
+      </div>
+    <% end %>     
+    
+    <main>
+      <%= yield %>
+    </main>
+    
+    <footer>
+      Copyright 2017 Bien Reviews – <%= link_to "About", about_path %> – <%= link_to "Terms", terms_path %>   
+    </footer>
+  </body>
+</html>
