@@ -58,7 +58,7 @@ gem "active_link_to"
 gem "profanity_filter"
 
 # lets add uploading files
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem 'mini_magick'
 gem "fog-aws"
 
